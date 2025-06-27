@@ -1,3 +1,4 @@
+<!-- RoverMissionPlanner.Api.csproj -->
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace RoverMissionPlanner.Application.Validators
                 .NotEmpty()
                 .WithMessage("RoverName es requerido")
                 .MaximumLength(100)
-                .WithMessage("RoverName no puede exceder los 100 caracteres");
+                .WithMessage("RoverName no puede exceder 100 caracteres");
 
             RuleFor(x => x.TaskType)
                 .IsInEnum()
@@ -30,13 +30,13 @@ namespace RoverMissionPlanner.Application.Validators
                 .NotEmpty()
                 .WithMessage("StartsAt es requerido")
                 .Must(BeInFuture)
-                .WithMessage("StartsAt debe ser una fecha futura");
+                .WithMessage("StartsAt debe ser en el futuro");
 
             RuleFor(x => x.DurationMinutes)
                 .GreaterThan(0)
-                .WithMessage("DurationInMinutes debe ser mayor que 0")
-                .LessThanOrEqualTo(1440)
-                .WithMessage("DurationInMinutes no puede exceder 1440 minutos (24 horas)");
+                .WithMessage("DurationMinutes debe ser mayor a 0")
+                .LessThanOrEqualTo(1440) // 24 horas
+                .WithMessage("DurationMinutes no puede exceder 1440 minutos (24 horas)");
         }
 
         private bool BeInFuture(DateTime startsAt)

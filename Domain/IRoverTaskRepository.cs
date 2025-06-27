@@ -5,6 +5,6 @@ namespace RoverMissionPlanner.Domain.Interfaces
         Task<IEnumerable<RoverTask>> GetTasksByRoverAndDateAsync(string roverId, DateOnly date);
         Task<RoverTask> AddTaskAsync(RoverTask task);
         Task<RoverTask?> GetTaskByIdAsync(Guid taskId);
-        Task<bool> HasOverlappingTasksAsync(string roverId, DateTime endsAt, Guid? excludeTaskId = null);
+        Task<bool> HasOverlappingTasksAsync(string roverId, DateTime startsAt, DateTime endsAt, Guid? excludeTaskId = null);
     }
 }

@@ -166,4 +166,7 @@ namespace RoverMissionPlanner.Tests
 
             // Act & Assert
             var result1 = await _roverTaskService.CreateTaskAsync(rover1, firstTask);
-            var result2 = await _
+            var result2 = await _roverTaskService.CreateTaskAsync(rover1, secondTask);
+        }
+    }
+}

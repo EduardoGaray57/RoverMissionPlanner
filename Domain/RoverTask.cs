@@ -8,7 +8,7 @@ namespace RoverMissionPlanner.Domain
         /// <summary>
         /// Identificador único de la tarea.
         /// </summary>
-        public Guild Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Nombre del rover al que se le asigna la tarea.
@@ -33,7 +33,7 @@ namespace RoverMissionPlanner.Domain
         /// <summary>
         /// Fecha y hora de inicio de la tarea en formato UTC.
         /// </summary>
-        public DateTime StartAt { get; set; }
+        public DateTime StartsAt { get; set; }
 
         /// <summary>
         /// Duración de la tarea en minutos.
@@ -46,19 +46,19 @@ namespace RoverMissionPlanner.Domain
         public Status Status { get; set; }
 
         /// <summary>
-        /// Fecha y hora de finalizacion calculada  
+        /// Fecha y hora de finalización calculada
         /// </summary>
-        public DateTime EndsAt => StartAt.AddMinutes(DurationMinutes);
+        public DateTime EndsAt => StartsAt.AddMinutes(DurationMinutes);
 
         /// <summary>
-        /// Verificacion de superposicion con otra tarea
+        /// Verifica si esta tarea se superpone con otra
         /// </summary>
         public bool OverlapsWith(RoverTask other)
         {
             if (other == null || RoverName != other.RoverName)
                 return false;
 
-            return StartAt < other.EndsAt && EndsAt > other.StartAt;
+            return StartsAt < other.EndsAt && EndsAt > other.StartsAt;
         }
     }
 }

@@ -9,10 +9,10 @@ namespace RoverMissionPlanner.Application.DTOs
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public DateTime StartsAt { get; set; }
-        public int DurationInMinutes { get; set; }
+        public int DurationMinutes { get; set; }
     }
 
-    public class CreateRoverTaskDto
+    public class RoverTaskDto
     {
         public Guid Id { get; set; }
         public string RoverName { get; set; } = string.Empty;
@@ -20,6 +20,7 @@ namespace RoverMissionPlanner.Application.DTOs
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public DateTime StartsAt { get; set; }
+        public int DurationMinutes { get; set; }
         public Status Status { get; set; }
         public DateTime EndsAt { get; set; }
     }

@@ -3,27 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 using RoverMissionPlanner.Application.DTOs;
 using RoverMissionPlanner.Application.Services;
 
-namespace RoverMissionPlanner.Api.Controllers
+namespace RoverMissionPlanner.Api.Controller
 {
     [ApiController]
     [Route("api/rovers")]
-
-    public class RoverController : ControllerBase
+    public class RoversController : ControllerBase
     {
-        private readonly IRoverTaskService _roverService;
-        private readonly IValidator<CreateRoverTaskDto> _Validator;
+        private readonly IRoverTaskService _roverTaskService;
+        private readonly IValidator<CreateRoverTaskDto> _validator;
 
-        public RoverController(IRoverService roverService, IValidator<CreateRoverTaskDto> validator)
+        public RoversController(IRoverTaskService roverTaskService, IValidator<CreateRoverTaskDto> validator)
         {
-            _roverService = roverService;
-            _Validator = validator;
+            _roverTaskService = roverTaskService;
+            _validator = validator;
         }
+
         /// <summary>
-        /// Creando nueva tarea para el rover especifico
+        /// Crea una nueva tarea para el rover especificado
         /// </summary>
-        /// <param name="id">Id del rover</param>
+        /// <param name="id">ID del rover</param>
         /// <param name="createTaskDto">Datos de la tarea a crear</param>
-        /// <returns>Tarea creada</returns>
+        /// <returns>La tarea creada</returns>
         [HttpPost("{id}/tasks")]
         public async Task<ActionResult<RoverTaskDto>> CreateTask(string id, [FromBody] CreateRoverTaskDto createTaskDto)
         {
@@ -43,7 +43,7 @@ namespace RoverMissionPlanner.Api.Controllers
                 return Conflict(new { message = ex.Message });
             }
         }
-        
+
         /// <summary>
         /// Obtiene todas las tareas de un rover para una fecha específica
         /// </summary>
@@ -62,7 +62,7 @@ namespace RoverMissionPlanner.Api.Controllers
             return Ok(tasks);
         }
 
-         /// <summary>
+        /// <summary>
         /// Obtiene el porcentaje de utilización de un rover para una fecha específica
         /// </summary>
         /// <param name="id">ID del rover</param>
@@ -79,6 +79,5 @@ namespace RoverMissionPlanner.Api.Controllers
             var utilization = await _roverTaskService.GetUtilizationAsync(id, parsedDate);
             return Ok(utilization);
         }
-
     }
 }
