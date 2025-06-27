@@ -33,7 +33,7 @@ namespace RoverMissionPlanner.Domain
         /// <summary>
         /// Fecha y hora de inicio de la tarea en formato UTC.
         /// </summary>
-        public DateTime StartAt { get; set; }
+        public DateTime StartsAt { get; set; }
 
         /// <summary>
         /// Duración de la tarea en minutos.
@@ -44,5 +44,10 @@ namespace RoverMissionPlanner.Domain
         /// Estado actual de la tarea.
         /// </summary>
         public Status Status { get; set; }
+
+        /// <summary>
+        /// Fecha y hora de finalización de la tarea calculada.
+        /// </summary>
+        public DateTime EndsAt => StartsAt.AddMinutes(DurationMinutes);
     }
 }

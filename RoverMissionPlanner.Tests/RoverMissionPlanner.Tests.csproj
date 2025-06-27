@@ -25,6 +25,11 @@
   <ItemGroup>
     <ProjectReference Include="..\RoverMissionPlanner.Domain\RoverMissionPlanner.Domain.csproj" />
     <ProjectReference Include="..\RoverMissionPlanner.Application\RoverMissionPlanner.Application.csproj" />
+    <ProjectReference Include="..\RoverMissionPlanner.Infrastructure\RoverMissionPlanner.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

@@ -31,28 +31,33 @@ namespace RoverMissionPlanner.Api.Middleware
         {
             context.Response.ContentType = "application/json";
 
-            var response = new
-            {
-                message = "An error occurred while processing your request",
-                details = exception.Message
-            };
+            object response;
+            int statusCode;
 
             switch (exception)
             {
                 case InvalidOperationException:
-                    context.Response.StatusCode = (int)HttpStatusCode.Conflict;
+                    statusCode = (int)HttpStatusCode.Conflict;
+                    response = new { message = exception.Message };
+                    break;
+                case ArgumentNullException:
+                    statusCode = (int)HttpStatusCode.BadRequest;
                     response = new { message = exception.Message };
                     break;
                 case ArgumentException:
-                case ArgumentNullException:
-                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    statusCode = (int)HttpStatusCode.BadRequest;
                     response = new { message = exception.Message };
                     break;
                 default:
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    statusCode = (int)HttpStatusCode.InternalServerError;
+                    response = new { 
+                        message = "An error occurred while processing your request",
+                        details = exception.Message 
+                    };
                     break;
             }
 
+            context.Response.StatusCode = statusCode;
             var jsonResponse = JsonSerializer.Serialize(response);
             await context.Response.WriteAsync(jsonResponse);
         }
