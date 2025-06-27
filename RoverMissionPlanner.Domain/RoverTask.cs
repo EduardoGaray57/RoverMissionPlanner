@@ -33,7 +33,7 @@ namespace RoverMissionPlanner.Domain
         /// <summary>
         /// Fecha y hora de inicio de la tarea en formato UTC.
         /// </summary>
-        public DateTime StartsAt { get; set; }
+        public DateTime StartAt { get; set; }
 
         /// <summary>
         /// Duración de la tarea en minutos.
@@ -44,21 +44,5 @@ namespace RoverMissionPlanner.Domain
         /// Estado actual de la tarea.
         /// </summary>
         public Status Status { get; set; }
-
-        /// <summary>
-        /// Fecha y hora de finalización calculada
-        /// </summary>
-        public DateTime EndsAt => StartsAt.AddMinutes(DurationMinutes);
-
-        /// <summary>
-        /// Verifica si esta tarea se superpone con otra
-        /// </summary>
-        public bool OverlapsWith(RoverTask other)
-        {
-            if (other == null || RoverName != other.RoverName)
-                return false;
-
-            return StartsAt < other.EndsAt && EndsAt > other.StartsAt;
-        }
     }
 }
