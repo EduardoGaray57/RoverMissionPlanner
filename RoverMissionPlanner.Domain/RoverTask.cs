@@ -44,5 +44,21 @@ namespace RoverMissionPlanner.Domain
         /// Estado actual de la tarea.
         /// </summary>
         public Status Status { get; set; }
+
+        /// <summary>
+        /// Fecha y hora de finalizacion calculada  
+        /// </summary>
+        public DateTime EndsAt => StartAt.AddMinutes(DurationMinutes);
+
+        /// <summary>
+        /// Verificacion de superposicion con otra tarea
+        /// </summary>
+        public bool OverlapsWith(RoverTask other)
+        {
+            if (other == null || RoverName != other.RoverName)
+                return false;
+
+            return StartAt < other.EndsAt && EndsAt > other.StartAt;
+        }
     }
 }
